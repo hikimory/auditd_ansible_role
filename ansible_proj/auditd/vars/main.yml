@@ -1,0 +1,39 @@
+---
+# vars file for auditd
+
+_auditd_package_name:
+  default:
+    - audit
+  Debian:
+    - auditd
+
+auditd_package_name: "{{ _auditd_package_name[ansible_os_family] | default(_auditd_package_name['default']) }}"
+
+auditd_config_directory: /etc/audit
+
+auditd_config_file: auditd.conf
+
+auditd_service: auditd
+
+auditd_start_service: true
+
+auditd_manage_rules: true
+
+auditd_file_rules: []
+# - file: path
+#   permissions: rwxa
+#   filters:
+#     - filter1=value1
+#     - filter1=value2
+#   keyname: keyname
+
+auditd_action_rules: []
+# - action: 'always,exit'
+#   arch: b32
+#   syscalls:
+#     - finit_module
+#     - delete_module
+#   filters:
+#     - filter1=value1
+#     - filter1=value2
+#   keyname: keyname

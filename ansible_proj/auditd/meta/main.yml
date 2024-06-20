@@ -1,0 +1,34 @@
+---
+galaxy_info:
+  author: hikimory
+  role_name: auditd
+  description: Install and configure auditd on your system.
+  license: Apache-2.0
+  company: none
+  min_ansible_version: "2.12"
+
+  platforms:
+    - name: EL
+      versions:
+        - "8"
+        - "9"
+    - name: Debian
+      versions:
+        - all
+    - name: Fedora
+      versions:
+        - all
+    - name: opensuse
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+
+  galaxy_tags:
+    - auditd
+    - system
+    - monitoring
+    - security
+
+dependencies: []

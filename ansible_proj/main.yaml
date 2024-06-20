@@ -1,0 +1,49 @@
+---
+- hosts: servers
+  become: true
+  roles:
+    - role: auditd
+      auditd_file_rules:
+        - file: /etc/sysctl.conf
+          permissions: wa
+          keyname: sysctl
+        - file: /etc/sysctl.d
+          permissions: wa
+          keyname: sysctl
+        - file: /etc/localtime
+          permissions: wa
+          keyname: localtime
+      auditd_action_rules:
+        - action: 'always,exit'
+          arch: b64
+          syscalls:
+            - mount
+            - umount2
+          filters:
+            - auid!=-1
+          keyname: mount
+        - action: 'always,exit'
+          arch: b64
+          syscalls:
+            - swapon
+            - swapoff
+          filters:
+            - auid!=-1
+          keyname: swap
+        - action: 'always,exit'
+          arch: b64
+          syscalls:
+            - adjtimex
+            - settimeofday
+            - clock_settime
+          filters:
+            - uid!=hikimory
+          keyname: swap
+        - action: 'always,exit'
+          arch: b64
+          syscalls:
+            - chmod
+          filters:
+            - auid>=1000
+            - auid!=-1
+          keyname: perm_mod

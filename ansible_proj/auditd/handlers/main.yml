@@ -1,0 +1,22 @@
+---
+# handlers file for auditd
+
+- name: Run augenrules
+  ansible.builtin.command:
+    cmd: augenrules
+  changed_when: true
+  notify:
+    - Load rules
+
+- name: Load rules
+  ansible.builtin.command:
+    cmd: augenrules --load
+  changed_when: true
+
+- name: Restart auditd
+  ansible.builtin.service:
+    name: "{{ auditd_service }}"
+    state: restarted
+    use: service
+  when:
+    - auditd_start_service

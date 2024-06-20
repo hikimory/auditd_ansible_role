@@ -1,0 +1,12 @@
+web_servers:
+  hosts:
+    master1:
+      ansible_host: 192.168.0.105
+db_servers:
+  hosts:
+    worker1:
+      ansible_host: 192.168.0.110
+servers:
+  children:
+    web_servers:
+    db_servers:
